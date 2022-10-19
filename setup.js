@@ -10,12 +10,16 @@ const puppeteer = require('puppeteer');
 const DIR = path.join(os.tmpdir(), 'jest_dappeteer_global_setup');
 
 module.exports = async function () {
-    const xvfb = new Xvfb();
-    xvfb.startSync();
+    var xvfb = new Xvfb({
+        silent: false,
+        xvfb_args: ["-screen", "0", '1280x720x24', "-ac"],
+    });
+    xvfb.startSync((err)=>{if (err) console.error(err)})
 
     const [metamask, page, browser] = await bootstrap(puppeteer, {
-        headless: true,
+        headless: false,
         metamaskVersion: 'v10.15.0',
+        args: ['--no-sandbox', '--start-fullscreen', '--display='+xvfb._display],
     });
 
     console.log('MetaMask has been setup');
