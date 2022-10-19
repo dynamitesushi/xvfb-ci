@@ -1,0 +1,51 @@
+name: Test
+run-name: Test
+on: [push]
+jobs:
+    node:
+        runs-on: ubuntu-latest
+
+        services:
+          minima:
+            image: minimaglobal/minima:latest
+            ports:
+                - 9001:9001
+                - 9002:9002
+                - 9003:9003
+                - 9004:9004
+                - 9005:9005
+            env: 
+                minima_server: true
+                minima_mdspassword: 123
+
+        strategy:
+          matrix:
+            node-version: [16.x]
+
+        steps:
+
+          - name: sleep for 10 seconds
+            uses: jakejarvis/wait-action@master
+            with:
+              time: '10s'
+
+          - uses: actions/checkout@v3
+          - name: Use Node.js ${{ matrix.node-version }}
+            uses: actions/setup-node@v3
+            with:
+              node-version: ${{ matrix.node-version }}
+              cache: 'npm'
+          - run: npm ci
+
+          - name: Run headless test
+            uses: GabrielBB/xvfb-action@v1
+            with:
+              run: npm test
+
+          - name: Upload screenshot artifacts
+            uses: actions/upload-artifact@v3
+            with:
+              name: 'screenshots'
+              path: |
+                screenshots
+                !screenshots/.gitignore

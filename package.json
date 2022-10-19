@@ -1,0 +1,29 @@
+{
+  "name": "xvfb-ci",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "patch": "node ./patch.js",
+    "test": "npm run patch && jest ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dynamitesushi/xvfb-ci.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dynamitesushi/xvfb-ci/issues"
+  },
+  "homepage": "https://github.com/dynamitesushi/xvfb-ci#readme",
+  "dependencies": {
+    "@chainsafe/dappeteer": "^3.0.0",
+    "jest": "^29.2.1",
+    "puppeteer": "^19.0.0"
+  },
+  "devDependencies": {
+    "mkdirp": "^1.0.4"
+  }
+}
