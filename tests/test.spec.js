@@ -2,12 +2,6 @@ const Xvfb = require('xvfb');
 
 describe('Wallet', () => {
     beforeAll(async () => {
-        var xvfb = new Xvfb({
-            silent: true,
-            xvfb_args: ["-screen", "0", '1280x720x24', "-ac"],
-        });
-        xvfb.start((err)=>{if (err) console.error(err)})
-
         await page.goto('https://localhost:9003');
         await page.type('input[type="password"]', '123');
         await page.click('input[type="submit"]');
