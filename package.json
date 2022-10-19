@@ -21,7 +21,8 @@
   "dependencies": {
     "@chainsafe/dappeteer": "^3.0.0",
     "jest": "^29.2.1",
-    "puppeteer": "^19.0.0"
+    "puppeteer": "^19.0.0",
+    "xvfb": "^0.4.0"
   },
   "devDependencies": {
     "mkdirp": "^1.0.4"
